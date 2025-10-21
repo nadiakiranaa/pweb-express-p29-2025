@@ -1,6 +1,6 @@
 # Auth
 
-## Register | POST | /auth/register
+## 1.Register | POST | /auth/register
 ```
 http://localhost:4000/auth/register
 ```
@@ -8,13 +8,13 @@ http://localhost:4000/auth/register
 <img width="1250" height="912" alt="Screenshot 2025-10-22 010253" src="https://github.com/user-attachments/assets/ef75430f-85a2-4ed3-a31d-6cce1b0c285e" />
 <img width="1385" height="233" alt="Screenshot 2025-10-22 010308" src="https://github.com/user-attachments/assets/b553468a-4d38-4c85-b6f8-cf95f99abfd7" />
 
-## Login | POST | /auth/login
+## 2.Login | POST | /auth/login
 ```
 http://localhost:4000/auth/login
 ```
 <img width="1257" height="927" alt="Screenshot 2025-10-22 010700" src="https://github.com/user-attachments/assets/d443d0fe-81b7-4d16-975f-1908f1439f6d" />
 
-## Get Me | GET | /auth/me
+## 3.Get Me | GET | /auth/me
 ```
 http://localhost:4000/auth/me
 ```
@@ -23,7 +23,46 @@ http://localhost:4000/auth/me
 
 # Library
 
-## 
+## 1.Create Book | POST | /books
+```
+http://localhost:4000/books
+```
+<img width="1226" height="845" alt="Screenshot 2025-10-22 012421" src="https://github.com/user-attachments/assets/5246d9c5-69fb-499a-9dd9-cc510e5aa977" />
+<img width="1359" height="140" alt="Screenshot 2025-10-22 012449" src="https://github.com/user-attachments/assets/a555193a-d272-4912-b1e3-4fe70a2b950e" />
+<img width="1334" height="131" alt="Screenshot 2025-10-22 012500" src="https://github.com/user-attachments/assets/c9379b90-54a6-4335-8d78-3055b08c76a6" />
+
+
+## 2.Get All Book | GET | /books
+```
+http://localhost:4000/books
+```
+Buku akan tampil semua
+<img width="1471" height="1003" alt="Screenshot 2025-10-22 012831" src="https://github.com/user-attachments/assets/910c1919-1f27-4255-9960-4967a2d67b00" />
+
+## 3.Get Book Detail | GET | /books/:book_id
+```
+http://localhost:4000/books/84f3cfec-17b0-40c3-9a70-c34667b155ab
+```
+Memanggil buku `Laut Bercerita` dengan ID buku `84f3cfec-17b0-40c3-9a70-c34667b155ab` dan dengan token `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTM0ZDJiLWM3NDAtNDU2Ni05NWQ0LTI5YzJmNDk0Njc1OSIsImVtYWlsIjoidGlyQGdtYWlsLmNvbSIsImlhdCI6MTc2MTA3MDAwNSwiZXhwIjoxNzYxMDczNjA1fQ.mqhPdWCSfMiBafJh6N68AmV71Cg_avaEFOBDGyNOBCc`
+<img width="1274" height="856" alt="Screenshot 2025-10-22 013625" src="https://github.com/user-attachments/assets/668ee34d-be5f-4fe8-a68f-23950f2e9d2b" />
+
+## 4.Get Book By Genre | GET | /books/genre/:genre_id
+```
+http://localhost:4000/books/genre/c34b1576-9613-4461-84e1-cbeea61df1db
+```
+Yaitu dengan memasukkan id genre `c34b1576-9613-4461-84e1-cbeea61df1db` 
+<img width="250" height="132" alt="Screenshot 2025-10-22 014926" src="https://github.com/user-attachments/assets/9b94b6e5-e4a0-4ca6-9ce4-5e62e9a160d3" />
+<img width="1477" height="974" alt="Screenshot 2025-10-22 014428" src="https://github.com/user-attachments/assets/8efded88-f941-40dc-9ce0-dd534d1caca3" />
+
+## 5.Update Book | PATCH | /books/:book_id
+```
+
+```
+## 6. Delete Book | DELETE | /books/:book_id
+```
+
+```
+
 
 
 
