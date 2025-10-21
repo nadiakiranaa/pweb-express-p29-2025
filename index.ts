@@ -1,8 +1,14 @@
 import express from "express";
+import authRoutes from "./routes/authRoutes";
+import bookRoutes from "./routes/bookRoutes";
 
 const app = express();
 
 app.use(express.json());
+// mount auth routes
+app.use("/auth", authRoutes);
+// mount book routes
+app.use("/books", bookRoutes);
 
 // check endpoint
 app.get("/", (_, response) => {
