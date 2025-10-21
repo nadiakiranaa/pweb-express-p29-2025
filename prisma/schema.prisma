@@ -1,0 +1,85 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // atau "mysql", "sqlite", dll.
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String?
+  password  String
+  email     String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  orders Order[]
+
+  @@map("users")
+}
+
+model Book {
+  id               String   @id @default(uuid())
+  title            String   @unique
+  writer           String
+  publisher        String
+  publicationYear  Int      @map("publication_year")
+  description      String?
+  price            Float
+  stockQuantity    Int      @map("stock_quantity")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+  deletedAt        DateTime? @map("deleted_at")
+
+  genre   Genre  @relation(fields: [genreId], references: [id])
+  genreId String @map("genre_id")
+
+  orderItems OrderItem[]
+
+  @@map("books")
+}
+
+model Genre {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  books Book[]
+
+  @@map("genres")
+}
+
+model Order {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  orderItems OrderItem[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String   @id @default(uuid())
+  quantity  Int
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  order   Order  @relation(fields: [orderId], references: [id])
+  orderId String @map("order_id")
+
+  book   Book   @relation(fields: [bookId], references: [id])
+  bookId String @map("book_id")
+
+  @@map("order_items")
+}
