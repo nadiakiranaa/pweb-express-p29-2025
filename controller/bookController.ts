@@ -195,7 +195,7 @@ export const updateBookController = async (req: Request, res: Response) => {
 
 		const existing = await prisma.book.findUnique({ where: { id: bookId } });
 		if (!existing) {
-			return res.status(404).json({ success: false, message: "Book not found" });
+			return res.status(404).json({ success: false, message: "Book not foundd" });
 		}
 
 		// accept both camelCase and snake_case for genre id
