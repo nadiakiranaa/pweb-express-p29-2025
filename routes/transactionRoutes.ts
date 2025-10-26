@@ -1,12 +1,23 @@
-import { Router } from "express";
-// import { createTransaction, getAllTransactions, getTransactionDetail, getTransactionStatistic } from '../controller/transactionController';
+import express from 'express';
+import {
+  createTransaction,
+  getAllTransactions,
+  getTransactionById,
+  getTransactionStats
+} from '../controller/TransactionController';
 
-// const router = Router();
+const router = express.Router();
 
-// // POST /genre -> create a new genre
-// router.post('/', createTransaction);
-// router.get('/', getAllTransactions);
-// router.get('/statistic', getTransactionStatistic);
-// router.get('/:id', getTransactionDetail);
+// Create new transaction
+router.post('/', createTransaction);
 
-// export default router;
+// Get all transactions with pagination, search, and sorting
+router.get('/', getAllTransactions);
+
+// Get transaction statistics (must be before /:id route)
+router.get('/statistics', getTransactionStats);
+
+// Get transaction by ID
+router.get('/:id', getTransactionById);
+
+export default router;

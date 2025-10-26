@@ -1,11 +1,8 @@
 import express from "express";
-<<<<<<< HEAD
 import authRoutes from "./routes/authRoutes";
 import bookRoutes from "./routes/bookRoutes";
-=======
 import genreRoutes from './routes/genreRoutes';
 // import transactionRoutes from './routes/transactionRoutes';
->>>>>>> 1fd12c42ca09d306a0c11cc32880d776b3f63fcf
 
 const app = express();
 

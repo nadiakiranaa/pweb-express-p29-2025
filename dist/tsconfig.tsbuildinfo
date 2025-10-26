@@ -1,0 +1,1 @@
+{"root":["../index.ts","../config/prisma.ts","../controller/genrecontroller.ts","../controller/transactioncontroller.ts","../controller/authcontroller.ts","../controller/bookcontroller.ts","../routes/authroutes.ts","../routes/bookroutes.ts","../routes/genreroutes.ts","../routes/transactionroutes.ts"],"version":"5.9.3"}

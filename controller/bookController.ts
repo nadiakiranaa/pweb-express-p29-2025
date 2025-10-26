@@ -61,7 +61,7 @@ export const getAllBookController = async (req: Request, res: Response) => {
 			prisma.book.count(),
 		]);
 
-		const data = books.map((b) => ({
+	const data = books.map((b: any) => ({
 			id: b.id,
 			title: b.title,
 			writer: b.writer,
@@ -154,7 +154,7 @@ export const getBooksByGenreController = async (req: Request, res: Response) => 
 			prisma.book.count({ where: { genreId: genreId } }),
 		]);
 
-		const data = books.map((b) => ({
+	const data = books.map((b: any) => ({
 			id: b.id,
 			title: b.title,
 			writer: b.writer,
