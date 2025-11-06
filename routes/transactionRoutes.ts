@@ -1,6 +1,7 @@
 import express from 'express';
 import {
   createTransaction,
+  createTransactionNoAuth,
   getAllTransactions,
   getTransactionById,
   getTransactionStats
@@ -8,7 +9,10 @@ import {
 
 const router = express.Router();
 
-// Create new transaction
+// Test create transaction WITHOUT auth (local testing only)
+router.post('/test', createTransactionNoAuth);
+
+// Create new transaction (requires Authorization header)
 router.post('/', createTransaction);
 
 // Get all transactions with pagination, search, and sorting

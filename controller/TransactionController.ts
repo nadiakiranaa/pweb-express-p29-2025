@@ -343,3 +343,85 @@ export const getTransactionStats = async (req: Request, res: Response) => {
     });
   }
 };
+
+// Test helper: create transaction WITHOUT auth (for local testing only)
+// WARNING: keep this disabled in production. Use only for debugging.
+export const createTransactionNoAuth = async (req: Request, res: Response) => {
+  try {
+    const { user_id, items } = req.body as TransactionRequest;
+
+    if (!user_id || !Array.isArray(items) || items.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid request body: user_id dan items wajib diisi",
+      });
+    }
+
+    // Validasi setiap item dalam array
+    for (const item of items) {
+      if (!item.book_id || typeof item.quantity !== "number" || item.quantity <= 0) {
+        return res.status(400).json({
+          success: false,
+          message: "Setiap item harus memiliki book_id dan quantity (number positif)",
+        });
+      }
+
+      // Cek ketersediaan buku
+      const book = await prisma.book.findUnique({
+        where: { id: item.book_id }
+      });
+
+      if (!book) {
+        return res.status(404).json({
+          success: false,
+          message: `Buku dengan ID ${item.book_id} tidak ditemukan`,
+        });
+      }
+    }
+
+    // Generate unique order ID
+    const baseId = `${user_id}-${Date.now()}`;
+    const hashedId = await bcrypt.hash(baseId, 10);
+
+    // Create transaction in orders table
+    const order = await prisma.order.create({
+      data: {
+        id: hashedId,
+        userId: user_id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    });
+
+    // Create order items
+    const orderItems = await Promise.all(
+      items.map((item) =>
+        prisma.orderItem.create({
+          data: {
+            orderId: order.id,
+            bookId: item.book_id,
+            quantity: item.quantity,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          },
+        })
+      )
+    );
+
+    return res.status(201).json({
+      success: true,
+      message: "(TEST) Transaksi berhasil dibuat",
+      data: {
+        order,
+        items: orderItems,
+      },
+    });
+  } catch (error: any) {
+    console.error("Error dalam membuat transaksi (no-auth):", error);
+    return res.status(500).json({
+      success: false,
+      message: "Terjadi kesalahan server",
+      error: error.message,
+    });
+  }
+};
